@@ -3,19 +3,14 @@
 var mongoose = require('mongoose');
 var jsdom = require("jsdom");
 var path = require('path');
+var http = require("http");
 require('./schema.js');
 
-var urls = ["https://www.kultureshop.in/papercut-mens-art-tees.html/"];
+var urls = ["https://www.kultureshop.in/papercut-mens-art-tees.html/"
+			//,"https://www.kultureshop.in/papercut-a2-large.html/"
+			];
 
-var config = {
-    db: {
-        uri: 'mongodb://localhost/task_wooplr',
-        options: {
-            user: '',
-            pass: ''
-        }
-    }
-};
+var config = require('./config');
 
 
 //connecting mongoose
@@ -38,7 +33,7 @@ for (var index in urls) {
     console.log();
 
 
-    var data = {};
+    
 
     //INIT message
     console.log("URL: "+url, "Loading.... ");
@@ -52,22 +47,23 @@ for (var index in urls) {
             } else {
                 var $ = window.$;
                 //console.log(window.$("html").html());
-                data.url = url;
-                data.title=window.$("title").text();
-
-
-
-
-
+                
                 // calling mongoose schema and adding data
                 var Product = mongoose.model('Product');
-                var product_data = new Product(data);
+                var product_data = new Product();
+                product_data.url = url;
+                product_data.title=$("title").text();
+                product_data.price=$(".productInfo .price:last").text();
+                product_data.images=[];
+                product_data.images.push($('.mainImgHolder > img').attr('src'));
+                console.log(product_data);
+
+                //process.exit(1);
                 product_data.save(function(err) {
                     if (err) {
                         console.log("error");
                     } else {
                         console.log("success");
-                        process.exit(1);
                     }
                 });
 
@@ -79,13 +75,5 @@ for (var index in urls) {
 
         }
     });
-
-
 }
 
-
-
-
-
-
-// // exit program

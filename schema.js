@@ -24,7 +24,17 @@ var ProductSchema = new Schema({
         type: Date,
         default: Date.now
     },
-    other:{}
+    price:{
+        type: String,
+        default: '',
+        trim: true,
+    },
+    images:[{
+        type: String,
+        default: '',
+        trim: true,
+    }]
+    ,other:{}
 
 });
 
