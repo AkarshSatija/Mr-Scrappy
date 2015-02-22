@@ -63,7 +63,7 @@ var product_data = new Product();
 
                 product_data.save(function(err) {
                     if (err) {
-                        console.log("error");
+                        console.log("error",err);
                     } else {
 
                     	//server
