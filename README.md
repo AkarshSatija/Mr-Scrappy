@@ -6,19 +6,24 @@ Sample Link: https://www.kultureshop.in/papercut-mens-art-tees.html/
 
 
 Prerequisite
-NodeJS should be installed
-MongoDb Server should be installed and running in the machine
-NPM should be installed
+- NodeJS should be installed
+- MongoDb Server should be installed and running in the machine
+- NPM should be installed
 
 Then,
 Clone this repo
 
-run  npm install
+To Install Dependencies Run-
 
-To start the app 
+```js
+npm install
+```
+Config file is /config.js to add mongoDB credentials
 
-run npm start
-
+To start the app Run- 
+```js
+npm start
+```
 
 The url is currently fetched from an inline variable on index.js and currently server is also being created in same file
 
