@@ -27,6 +27,35 @@ mongoose.connection.on('error', function(err) {
     process.exit(-1);
 });
 
+//server
+var Product = mongoose.model('Product');
+var product_data = new Product();
+
+var server = http.createServer(function(req, res) {
+  //res.writeHead(200, {"Content-Type": "text/json"});
+  //res.json(config);
+
+  Product.find().sort('-createdAt').exec(function(err, data) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.write(JSON.stringify(data)); res.end();
+		}
+	});
+
+
+
+});
+ 
+server.listen(8000);
+console.log("Server is listening");
+
+
+
+
+//Crawling
 
 for (var index in urls) {
     var url = urls[index];
@@ -36,7 +65,7 @@ for (var index in urls) {
     
 
     //INIT message
-    console.log("URL: "+url, "Loading.... ");
+    console.log("Loading.... ","URL: "+url);
 
     jsdom.env({
         url: url,
@@ -49,8 +78,7 @@ for (var index in urls) {
                 //console.log(window.$("html").html());
                 
                 // calling mongoose schema and adding data
-                var Product = mongoose.model('Product');
-                var product_data = new Product();
+                
                 product_data.url = url;
                 product_data.title=$("title").text();
                 product_data.price=$(".productInfo .price:last").text();
