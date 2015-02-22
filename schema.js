@@ -25,6 +25,12 @@ var ProductSchema = new Schema({
         type: Date,
         default: Date.now
     },
+    description:{
+        type: String,
+        default: '',
+        trim: true,
+    },
+
     price:{
         type: String,
         default: '',
