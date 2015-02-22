@@ -19,7 +19,7 @@ var ProductSchema = new Schema({
         type: String,
         //default: '',
         trim: true,
-        unique: 'URL already exists',
+        //unique: 'URL already exists',
     },
     createdAt: {
         type: Date,
