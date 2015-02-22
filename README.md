@@ -18,6 +18,8 @@ To Install Dependencies Run-
 ```js
 npm install
 ```
+Config file is /config.js to add mongoDB credentials
+
 To start the app Run- 
 ```js
 npm start
